@@ -183,6 +183,7 @@ export default function AvpAyantsDroitPage() {
   const [apiError, setApiError] = useState("");
   const [loading, setLoading] = useState(false);
   const resultsRef = useRef(null);
+  const formRef = useRef(null);
 
   function update(name, value) {
     setForm((current) => ({ ...current, [name]: value }));
@@ -223,10 +224,15 @@ export default function AvpAyantsDroitPage() {
     if (!validateForm()) return;
     setLoading(true);
     try {
-      const response = await fetch("/api/avp-ayants-droit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+      let response;
+      try {
+        response = await fetch("/api/avp-ayants-droit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
           dateNaissance: form.dateNaissance,
           dateAccident: form.dateAccident,
           salaryAmount: Number(form.salaryAmount),
@@ -246,8 +252,12 @@ export default function AvpAyantsDroitPage() {
             otherObligatory: Number(form.otherObligatory),
             otherVoluntary: Number(form.otherVoluntary),
           },
-        }),
-      });
+          }),
+          signal: controller.signal
+        });
+      } finally {
+        clearTimeout(timeoutId);
+      }
       const data = await response.json();
 
       if (!response.ok) {
@@ -267,7 +277,11 @@ export default function AvpAyantsDroitPage() {
         }
       }, 60);
     } catch (error) {
-      setApiError("تعذّر الاتصال بالخادم — يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً");
+      if (error.name === "AbortError") {
+        setApiError("انتهت مهلة الطلب — يرجى المحاولة مجدداً");
+      } else {
+        setApiError("تعذّر الاتصال بالخادم — يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً");
+      }
     } finally {
       setLoading(false);
     }
@@ -406,7 +420,7 @@ export default function AvpAyantsDroitPage() {
           <div className="ad-slot"><span>إعلان</span><span>728 × 90</span></div>
 
           <main className="grid">
-            <form onSubmit={handleSubmit} noValidate className="panel form-panel">
+            <form ref={formRef} onSubmit={handleSubmit} noValidate className="panel form-panel">
               <header className="panel-head">
                 <span className="panel-step">١</span>
                 <div>
@@ -472,7 +486,21 @@ export default function AvpAyantsDroitPage() {
                   </Field>
                 </div>
 
-                {apiError && <div className="alert alert-error"><Icon name="alert" size={18} />{apiError}</div>}
+                {apiError && (
+                  <>
+                    <div className="alert alert-error" role="alert">
+                      <Icon name="alert" size={18} />
+                      <span>{apiError}</span>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn-primary"
+                      onClick={() => formRef.current?.requestSubmit()}
+                    >
+                      حاول مجدداً
+                    </button>
+                  </>
+                )}
               </div>
 
               <footer className="panel-foot">

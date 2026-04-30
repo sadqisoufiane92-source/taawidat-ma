@@ -240,6 +240,7 @@ export default function TravailPage() {
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
   const resultsRef = useRef(null);
+  const formRef = useRef(null);
 
   const total = useMemo(() => {
     if (!results) return 0;
@@ -316,11 +317,20 @@ export default function TravailPage() {
               ...(Number(form.ascendantsCount) >= 2 ? [{ birthdate: form.motherBirthdate }] : [])
             ]
           };
-      const response = await fetch("/api/travail", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+      let response;
+      try {
+        response = await fetch("/api/travail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+          signal: controller.signal
+        });
+      } finally {
+        clearTimeout(timeoutId);
+      }
       const data = await response.json();
 
       if (!response.ok) {
@@ -340,7 +350,11 @@ export default function TravailPage() {
         }
       }, 60);
     } catch (error) {
-      setApiError("تعذّر الاتصال بالخادم — يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً");
+      if (error.name === "AbortError") {
+        setApiError("انتهت مهلة الطلب — يرجى المحاولة مجدداً");
+      } else {
+        setApiError("تعذّر الاتصال بالخادم — يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً");
+      }
     } finally {
       setLoading(false);
     }
@@ -478,7 +492,7 @@ export default function TravailPage() {
           <div className="ad-slot"><span>إعلان</span><span>728 × 90</span></div>
 
           <main className="grid">
-            <form onSubmit={handleSubmit} noValidate className="panel form-panel">
+            <form ref={formRef} onSubmit={handleSubmit} noValidate className="panel form-panel">
               <header className="panel-head">
                 <span className="panel-step">١</span>
                 <div>
@@ -619,7 +633,21 @@ export default function TravailPage() {
                 </div>
               </header>
               <div className="panel-body results-body">
-                {apiError && <div className="alert alert-error"><Icon name="alert" size={18} /><span>{apiError}</span></div>}
+                {apiError && (
+                  <>
+                    <div className="alert alert-error" role="alert">
+                      <Icon name="alert" size={18} />
+                      <span>{apiError}</span>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={() => formRef.current?.requestSubmit()}
+                    >
+                      حاول مجدداً
+                    </button>
+                  </>
+                )}
                 {!results && !apiError && <EmptyResults />}
                 {results?.mode === "victime" && <VictimResults results={results} />}
                 {results?.mode === "deces" && <DeathResults results={results} />}
