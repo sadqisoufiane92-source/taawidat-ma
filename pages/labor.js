@@ -1660,49 +1660,40 @@ export default function LaborPage() {
 
               {!results && !apiError && <EmptyResults />}
 
-              {results &&
-                form.selected.map((key, idx) => {
+              {results && (total || 0) === 0 && (
+                <p style={{ textAlign: "center", color: "var(--c-text-500)", fontSize: "14px", padding: "32px 16px" }}>
+                  لم يتم احتساب أي مبلغ بناءً على المعطيات المدخلة
+                </p>
+              )}
+
+              {results && total > 0 && (() => {
+                const cards = form.selected.map((key, idx) => {
                   const item = CALCULATIONS.find((c) => c.key === key);
                   const result = results.results[key];
                   if (!item || !result) return null;
-                  if (key === "prejudice")
-                    return (
-                      <PrejudiceCard
-                        key={key}
-                        index={idx}
-                        label={item.label}
-                        result={result}
-                        monthlySalary={form.monthlySalary}
-                      />
-                    );
-                  if (key === "preavis")
-                    return <PreavisCard key={key} index={idx} label={item.label} result={result} />;
-                  if (key === "indemnite")
-                    return (
-                      <IndemniteCard
-                        key={key}
-                        index={idx}
-                        label={item.label}
-                        result={result}
-                        monthlySalary={Number(form.monthlySalary)}
-                      />
-                    );
-                  if (key === "conges")
-                    return (
-                      <CongesCard
-                        key={key}
-                        index={idx}
-                        label={item.label}
-                        result={result}
-                        monthlySalary={Number(form.monthlySalary)}
-                      />
-                    );
-                  if (key === "prime")
-                    return <PrimeCard key={key} index={idx} label={item.label} result={result} />;
+                  const amount = amountFor(key, result);
+                  if (amount === 0) return null;
+                  if (key === "prejudice") return <PrejudiceCard key={key} index={idx} label={item.label} result={result} monthlySalary={form.monthlySalary} />;
+                  if (key === "preavis") return <PreavisCard key={key} index={idx} label={item.label} result={result} />;
+                  if (key === "indemnite") return <IndemniteCard key={key} index={idx} label={item.label} result={result} monthlySalary={Number(form.monthlySalary)} />;
+                  if (key === "conges") return <CongesCard key={key} index={idx} label={item.label} result={result} monthlySalary={Number(form.monthlySalary)} />;
+                  if (key === "prime") return <PrimeCard key={key} index={idx} label={item.label} result={result} />;
                   return null;
-                })}
+                });
 
-              {results && (
+                const hasSkipped = form.selected.some((key) => {
+                  const result = results.results[key];
+                  return !result || amountFor(key, result) === 0;
+                });
+
+                return (
+                  <>
+                    {cards}
+                    {hasSkipped && (
+                      <p style={{ fontSize: "12px", color: "var(--c-text-500)", fontStyle: "italic", textAlign: "center" }}>
+                        تم عرض النتائج المتاحة فقط
+                      </p>
+                    )}
                 <div className="total-card">
                   <div className="total-pattern" aria-hidden="true" />
                   <div className="total-inner">
@@ -1734,7 +1725,9 @@ export default function LaborPage() {
                     </span>
                   </div>
                 </div>
-              )}
+                  </>
+                );
+              })()}
             </div>
           </section>
         </main>

@@ -707,13 +707,35 @@ export default function AvpVictimePage() {
               <div className="panel-body results-body">
                 {!results ? (
                   <EmptyResults />
+                ) : results.total === 0 ? (
+                  <p style={{ textAlign: "center", color: "var(--c-text-500)", fontSize: "14px", padding: "32px 16px" }}>
+                    لم يتم احتساب أي مبلغ بناءً على المعطيات المدخلة
+                  </p>
                 ) : (
                   <>
-                    <ResultCard index={1} label="تعويض العجز المؤقت ITT" result={results.itt} kind="itt" />
-                    <ResultCard index={2} label="تعويض العجز الدائم IPP" result={results.ipp} kind="ipp" />
-                    {supplementCards.map(([key, result], index) => (
-                      <ResultCard key={key} index={index + 3} label={SUPPLEMENT_LABELS[key] || key} result={result} kind={key} />
-                    ))}
+                    {amountForResult(results.itt) > 0 && (
+                      <ResultCard index={1} label="تعويض العجز المؤقت ITT" result={results.itt} kind="itt" />
+                    )}
+                    {amountForResult(results.ipp) > 0 && (
+                      <ResultCard index={2} label="تعويض العجز الدائم IPP" result={results.ipp} kind="ipp" />
+                    )}
+                    {supplementCards.every(([, r]) => !r || amountForResult(r) === 0) && (
+                      <p style={{ fontSize: "13px", color: "var(--c-text-500)", textAlign: "center", padding: "8px 0" }}>
+                        لا توجد تعويضات تكميلية مفعلة
+                      </p>
+                    )}
+                    {supplementCards.map(([key, result], index) => {
+                      if (!result || amountForResult(result) === 0) return null;
+                      return (
+                        <ResultCard key={key} index={index + 3} label={SUPPLEMENT_LABELS[key] || key} result={result} kind={key} />
+                      );
+                    })}
+                    {supplementCards.some(([, r]) => !r || amountForResult(r) === 0) &&
+                     !supplementCards.every(([, r]) => !r || amountForResult(r) === 0) && (
+                      <p style={{ fontSize: "12px", color: "var(--c-text-500)", fontStyle: "italic", textAlign: "center" }}>
+                        تم عرض النتائج المتاحة فقط
+                      </p>
+                    )}
                     <article className="total-card">
                       <div className="total-inner">
                         <span className="total-eyebrow"><Icon name="check" size={16} />المجموع الكلي</span>

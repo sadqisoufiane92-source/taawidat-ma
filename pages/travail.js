@@ -649,9 +649,14 @@ export default function TravailPage() {
                   </>
                 )}
                 {!results && !apiError && <EmptyResults />}
-                {results?.mode === "victime" && <VictimResults results={results} />}
-                {results?.mode === "deces" && <DeathResults results={results} />}
-                {results && (
+                {results && total === 0 && (
+                  <p style={{ textAlign: "center", color: "var(--c-text-500)", fontSize: "14px", padding: "32px 16px" }}>
+                    لم يتم احتساب أي مبلغ بناءً على المعطيات المدخلة
+                  </p>
+                )}
+                {results?.mode === "victime" && total > 0 && <VictimResults results={results} />}
+                {results?.mode === "deces" && total > 0 && <DeathResults results={results} />}
+                {results && total > 0 && (
                   <div className="total-card">
                     <div className="total-inner">
                       <span className="total-eyebrow"><Icon name="scale" size={14} />المجموع المرجعي</span>

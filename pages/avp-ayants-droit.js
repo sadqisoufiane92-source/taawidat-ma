@@ -521,17 +521,28 @@ export default function AvpAyantsDroitPage() {
               <div className="panel-body results-body">
                 {!results ? (
                   <EmptyResults />
+                ) : combinedTotal === 0 ? (
+                  <p style={{ textAlign: "center", color: "var(--c-text-500)", fontSize: "14px", padding: "32px 16px" }}>
+                    لم يتم احتساب أي مبلغ بناءً على المعطيات المدخلة
+                  </p>
                 ) : (
                   <>
-                    {results.beneficiaries.map((item, index) => (
-                      <BeneficiaryCard
-                        key={item.key}
-                        index={index + 1}
-                        item={{ ...item, referenceCapital: results.referenceCapital }}
-                        dommagesMoraux={results.dommagesMoraux}
-                        responsibilityRate={results.inputs.responsibilityRate}
-                      />
-                    ))}
+                    {results.beneficiaries
+                      .filter((item) => item.netAmount > 0 || item.grossAmount > 0)
+                      .map((item, index) => (
+                        <BeneficiaryCard
+                          key={item.key}
+                          index={index + 1}
+                          item={{ ...item, referenceCapital: results.referenceCapital }}
+                          dommagesMoraux={results.dommagesMoraux}
+                          responsibilityRate={results.inputs.responsibilityRate}
+                        />
+                      ))}
+                    {results.beneficiaries.some((item) => item.netAmount === 0 && item.grossAmount === 0) && (
+                      <p style={{ fontSize: "12px", color: "var(--c-text-500)", fontStyle: "italic", textAlign: "center" }}>
+                        تم عرض النتائج المتاحة فقط
+                      </p>
+                    )}
                     {showAdjustment && (
                       <article className="result-card">
                         <ResultHeader index={results.beneficiaries.length + 1} label="تعديل المادة 13" amount={results.adjustment.total14Gross} />
