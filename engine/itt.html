@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>حاسبة العجز المؤقت</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 500px; margin: 40px auto; padding: 0 16px; direction: rtl; }
+  h2 { margin-bottom: 4px; }
+  .subtitle { font-size: 12px; color: #666; margin-bottom: 24px; }
+  .field { margin-bottom: 14px; }
+  label { display: block; font-size: 13px; margin-bottom: 4px; }
+  input { width: 100%; padding: 7px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; text-align: right; box-sizing: border-box; }
+  input.err { border-color: #c00; }
+  .field-note { font-size: 11px; color: #888; margin-top: 3px; }
+  .warn { font-size: 12px; color: #b84c00; margin-top: 4px; display: none; }
+  .error-msg { font-size: 12px; color: #c00; margin-top: 4px; display: none; }
+  .resp-row { display: flex; align-items: center; gap: 10px; }
+  .resp-row input[type="range"] { flex: 1; direction: ltr; }
+  .resp-val { min-width: 40px; font-weight: bold; font-size: 14px; }
+  button { margin-top: 8px; width: 100%; padding: 10px; font-size: 14px; cursor: pointer; }
+
+  /* Result */
+  #result { margin-top: 20px; padding: 14px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 4px; display: none; }
+  #result table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  #result td { padding: 6px 4px; border-bottom: 1px solid #e0e0e0; }
+  #result td:last-child { text-align: left; font-weight: 600; font-family: monospace; font-size: 13px; }
+  .row-total td { font-size: 15px; font-weight: bold; color: #1a5fa8; border-top: 2px solid #bbb; border-bottom: none; padding-top: 10px; }
+  .row-formula td { font-size: 11px; color: #888; border-bottom: none; }
+  .row-formula td:last-child { font-family: monospace; font-weight: normal; direction: ltr; text-align: left; }
+  .row-ref td { font-size: 11px; color: #888; border-bottom: none; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h2>التعويض عن العجز المؤقت (ITT)</h2>
+<p class="subtitle">المادة الثالثة (أ) — القانون رقم 70.24</p>
+
+<!-- Salary -->
+<div class="field">
+  <label>الأجر أو الكسب المهني السنوي الصافي من الضريبة (درهم)</label>
+  <input type="number" id="salary" placeholder="مثال: 84000" min="1" step="1" oninput="onSalary()">
+  <div class="field-note">الأجر الصافي خلال 12 شهراً قبل الحادثة — المادة الأولى مكررة</div>
+  <div class="warn" id="warnMin">
+    الأجر أقل من الحد الأدنى القانوني (14.270 درهم) — سيُعتمد الحد الأدنى تلقائياً (المادة 6)
+  </div>
+  <div class="error-msg" id="errSalary">الرجاء إدخال أجر صحيح (أكبر من الصفر)</div>
+</div>
+
+<!-- Days -->
+<div class="field">
+  <label>عدد أيام العجز المثبتة في الشهادة الطبية</label>
+  <input type="number" id="days" placeholder="مثال: 45" min="1" step="1">
+  <div class="field-note">بالأيام فقط — وفق الشهادة الطبية</div>
+  <div class="error-msg" id="errDays">الرجاء إدخال عدد أيام صحيح (1 على الأقل)</div>
+</div>
+
+<!-- Responsibility -->
+<div class="field">
+  <label>نسبة المسؤولية — المادة الأولى مكررة مرتين</label>
+  <div class="resp-row">
+    <input type="range" id="resp" min="0" max="100" value="100" step="5"
+           oninput="document.getElementById('respVal').textContent = this.value + '%'">
+    <span class="resp-val" id="respVal">100%</span>
+  </div>
+</div>
+
+<button onclick="calculate()">احتساب التعويض</button>
+
+<!-- Result -->
+<div id="result">
+  <table>
+    <tr><td>الأجر السنوي المعتمد</td><td id="rSalary"></td></tr>
+    <tr><td>عدد أيام العجز</td><td id="rDays"></td></tr>
+    <tr><td>المبلغ الخام (قبل المسؤولية)</td><td id="rGross"></td></tr>
+    <tr><td>نسبة المسؤولية</td><td id="rResp"></td></tr>
+    <tr class="row-total">
+      <td>مبلغ التعويض عن العجز المؤقت</td>
+      <td id="rNet"></td>
+    </tr>
+    <tr class="row-formula">
+      <td>الصيغة المطبقة</td>
+      <td id="rFormula"></td>
+    </tr>
+    <tr class="row-ref">
+      <td colspan="2" id="rRef"></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+  // ─── Constants ────────────────────────────────────────────────────────────
+  const MIN_SALARY = 14270; // Minimum légal — Tableau Art. 5, Loi 70.24
+
+  // ─── Engine ───────────────────────────────────────────────────────────────
+  /**
+   * calcITT — Indemnité Incapacité Temporaire de Travail
+   * Référence : Art. 3(a), Loi 70.24
+   * Formule   : floor( (salary × days / 365) × respRate )
+   *
+   * Règles :
+   *  - salary   : doit être > 0 ; si < MIN_SALARY → MIN_SALARY appliqué (Art. 6)
+   *  - days     : entier > 0, fourni par certificat médical (jours uniquement)
+   *  - respRate : 0–1, défaut 1.0
+   *  - Arrondi  : Math.floor() — jamais surpayer (règle prudentielle)
+   *
+   * @param {number} salary    Salaire annuel net saisi
+   * @param {number} days      Jours d'incapacité (certificat médical)
+   * @param {number} respRate  Taux de responsabilité 0–1
+   * @returns {{ salaryUsed, days, gross, net, salaryAdjusted }}
+   */
+  function calcITT(salary, days, respRate) {
+    if (salary <= 0) throw new Error('Salaire invalide');
+    if (days < 1)    throw new Error('Durée invalide');
+
+    const salaryUsed     = Math.max(salary, MIN_SALARY);
+    const salaryAdjusted = salaryUsed > salary; // true si min appliqué
+    const gross          = (salaryUsed * days) / 365;
+    const net            = Math.floor(gross * respRate);
+
+    return { salaryUsed, days, gross, net, salaryAdjusted };
+  }
+
+  // ─── Helpers ──────────────────────────────────────────────────────────────
+  function fmt(n) {
+    return Math.floor(n).toLocaleString('fr-MA') + ' درهم';
+  }
+
+  function clearErrors() {
+    ['salary','days'].forEach(id => {
+      document.getElementById(id).classList.remove('err');
+    });
+    document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+  }
+
+  function onSalary() {
+    const v = parseFloat(document.getElementById('salary').value);
+    const warn = document.getElementById('warnMin');
+    warn.style.display = (!isNaN(v) && v > 0 && v < MIN_SALARY) ? 'block' : 'none';
+  }
+
+  // ─── Main ────────────────────────────────────────────────────────────────
+  function calculate() {
+    clearErrors();
+
+    const salaryRaw = document.getElementById('salary').value.trim();
+    const daysRaw   = document.getElementById('days').value.trim();
+    const respPct   = parseInt(document.getElementById('resp').value);
+
+    const salary = parseFloat(salaryRaw);
+    const days   = parseInt(daysRaw);
+
+    let valid = true;
+
+    // Validate salary: must be a number > 0
+    if (salaryRaw === '' || isNaN(salary) || salary <= 0) {
+      document.getElementById('salary').classList.add('err');
+      document.getElementById('errSalary').style.display = 'block';
+      valid = false;
+    }
+
+    // Validate days: must be integer >= 1
+    if (daysRaw === '' || isNaN(days) || days < 1) {
+      document.getElementById('days').classList.add('err');
+      document.getElementById('errDays').style.display = 'block';
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    const result = calcITT(salary, days, respPct / 100);
+
+    // Populate result
+    document.getElementById('rSalary').textContent =
+      fmt(result.salaryUsed) + (result.salaryAdjusted ? ' (الحد الأدنى — المادة 6)' : '');
+    document.getElementById('rDays').textContent   = `${result.days} يوم`;
+    document.getElementById('rGross').textContent  = fmt(result.gross);
+    document.getElementById('rResp').textContent   = `${respPct}%`;
+    document.getElementById('rNet').textContent    = fmt(result.net);
+
+    document.getElementById('rFormula').textContent =
+      `floor( (${result.salaryUsed.toLocaleString('fr-MA')} × ${result.days}) ÷ 365 × ${(respPct/100).toFixed(2)} )`;
+
+    document.getElementById('rRef').textContent =
+      `المرجع: المادة الثالثة (أ)، القانون رقم 70.24 — التاريخ: ${new Date().toLocaleDateString('ar-MA')}`;
+
+    document.getElementById('result').style.display = 'block';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── INDEX PAGE ── */
+.index-page *, .index-page *::before, .index-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.index-page {
+  --green-deep:   #1B4332;
+  --green-mid:    #2D6A4F;
+  --green-light:  #40916C;
+  --green-soft:   #D8F3DC;
+  --gold:         #C9A84C;
+  --gold-light:   #F0D080;
+  --gold-pale:    #FDF6E3;
+  --text-on-dark: #F8F5EE;
+  --text-muted:   #A8B2A0;
+  --bg:           #F7F5F0;
+  --card-bg:      #FFFFFF;
+  --border:       #E4DDD0;
+  --disabled-bg:  #F0EDE8;
+  --disabled-text:#A0998E;
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: #2C2C2C;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+.index-page header {
+  background: var(--green-deep);
+  text-align: center;
+  padding: 52px 24px 44px;
+  position: relative;
+  overflow: hidden;
+}
+
+.index-page header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 120%, rgba(64,145,108,.25) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% -10%, rgba(201,168,76,.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.index-page .header-inner { position: relative; z-index: 1; }
+
+.index-page .header-icon {
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 16px;
+  display: block;
+  filter: drop-shadow(0 2px 12px rgba(201,168,76,.4));
+}
+
+.index-page .site-name {
+  font-size: clamp(26px, 5vw, 40px);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.index-page .site-name span {
+  color: var(--gold-light);
+}
+
+.index-page .tagline {
+  font-size: clamp(13px, 2.5vw, 16px);
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+/* decorative divider */
+.index-page .header-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+.index-page .header-divider::before,
+.index-page .header-divider::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to left, transparent, rgba(201,168,76,.5));
+}
+.index-page .header-divider::after {
+  background: linear-gradient(to right, transparent, rgba(201,168,76,.5));
+}
+.index-page .header-divider-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  border-radius: 1px;
+}
+
+/* ── MAIN ── */
+.index-page main {
+  flex: 1;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 24px 40px;
+}
+
+.index-page .section-label {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+/* ── GRID ── */
+.index-page .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 560px) {
+  .index-page .cards-grid { grid-template-columns: 1fr; }
+}
+
+/* ── CARD BASE ── */
+.index-page .card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* ── ACTIVE CARD ── */
+.index-page .card.active {
+  border-color: var(--green-light);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.index-page .card.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(64,145,108,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.index-page .card.active:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(27,67,50,.14);
+  border-color: var(--green-mid);
+}
+
+.index-page .card.active:hover .card-arrow {
+  transform: translateX(-4px);
+}
+
+/* ── DISABLED CARD ── */
+.index-page .card.disabled {
+  background: var(--disabled-bg);
+  border-color: #E0DAD2;
+  cursor: default;
+}
+
+/* ── CARD ELEMENTS ── */
+.index-page .card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.index-page .card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.index-page .card.active .card-icon {
+  background: var(--green-soft);
+}
+
+.index-page .card.disabled .card-icon {
+  background: #EAE4DC;
+}
+
+.index-page .badge-soon {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--disabled-text);
+  background: #E4DDD4;
+  border-radius: 20px;
+  padding: 3px 10px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.index-page .card-title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #1E1E1E;
+}
+
+.index-page .card.disabled .card-title {
+  color: var(--disabled-text);
+}
+
+.index-page .card-law {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.4px;
+}
+
+.index-page .card.disabled .card-law {
+  color: #B8B0A6;
+}
+
+.index-page .card-desc {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #6B6560;
+  line-height: 1.7;
+}
+
+.index-page .card.disabled .card-desc {
+  color: #ADA89F;
+}
+
+.index-page .card-footer {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.index-page .card-cta {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green-light);
+}
+
+.index-page .card-arrow {
+  font-size: 14px;
+  color: var(--green-light);
+  transition: transform .2s ease;
+  display: inline-block;
+}
+
+/* ── AD SLOTS ── */
+.index-page .ad-slot {
+  width: 100%;
+  height: 90px;
+  background: #F0EDE8;
+  border: 1.5px dashed #C8C0B4;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #B0A89E;
+  letter-spacing: 1px;
+  margin: 24px 0;
+}
+
+/* ── FOOTER ── */
+.index-page footer {
+  background: var(--green-deep);
+  text-align: center;
+  padding: 20px 24px;
+}
+
+.index-page .footer-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(248,245,238,.45);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.index-page .footer-text::before {
+  content: '⚠️ ';
+}

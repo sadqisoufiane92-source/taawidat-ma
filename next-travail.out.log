@@ -1,0 +1,54 @@
+
+> avp-calculator@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3001
+
+ ✓ Starting...
+ ✓ Ready in 1639ms
+ ○ Compiling /api/travail ...
+ ✓ Compiled /api/travail in 2.6s (282 modules)
+ ✓ Compiled in 100ms (215 modules)
+ POST /api/travail 200 in 2779ms
+ POST /api/travail 200 in 2760ms
+ GET /travail 200 in 2930ms
+ ✓ Compiled in 234ms (264 modules)
+ ✓ Compiled in 97ms (213 modules)
+ ✓ Compiled in 117ms (213 modules)
+ ✓ Compiled in 193ms (213 modules)
+ ✓ Compiled in 128ms (213 modules)
+ ✓ Compiled in 90ms (213 modules)
+ ✓ Compiled in 90ms (213 modules)
+ ✓ Compiled /api/travail in 51ms (65 modules)
+ ✓ Compiled /_error in 102ms (280 modules)
+ POST /api/travail 500 in 302ms
+ ✓ Compiled in 122ms (266 modules)
+ ✓ Compiled in 163ms (213 modules)
+ ✓ Compiled in 165ms (213 modules)
+ ✓ Compiled in 104ms (213 modules)
+ ✓ Compiled in 77ms (213 modules)
+ ✓ Compiled in 121ms (213 modules)
+ ✓ Compiled in 114ms (213 modules)
+ ✓ Compiled in 134ms (213 modules)
+ ✓ Compiled in 107ms (213 modules)
+ ✓ Compiled in 87ms (213 modules)
+ ✓ Compiled in 127ms (213 modules)
+ ✓ Compiled in 105ms (213 modules)
+ ✓ Compiled in 118ms (213 modules)
+ ✓ Compiled in 95ms (213 modules)
+ ✓ Compiled in 94ms (213 modules)
+ ✓ Compiled in 97ms (213 modules)
+ ✓ Compiled in 82ms (213 modules)
+ ✓ Compiled in 74ms (213 modules)
+ ✓ Compiled in 102ms (213 modules)
+ ✓ Compiled in 85ms (213 modules)
+ ✓ Compiled in 113ms (213 modules)
+ ✓ Compiled in 165ms (213 modules)
+ ✓ Compiled in 100ms (213 modules)
+ ✓ Compiled in 114ms (213 modules)
+ ✓ Compiled in 100ms (213 modules)
+ ✓ Compiled in 98ms (213 modules)
+ ✓ Compiled in 107ms (213 modules)
+ ✓ Compiled in 120ms (213 modules)
+ ✓ Compiled in 80ms (213 modules)

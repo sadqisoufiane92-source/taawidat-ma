@@ -1,0 +1,13 @@
+
+> avp-calculator@1.0.0 dev
+> next dev -p 3006
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3006
+
+ ✓ Starting...
+ ✓ Ready in 1495ms
+ ✓ Compiled /api/avp-ayants-droit in 167ms (68 modules)
+ POST /api/avp-ayants-droit 200 in 202ms
+ POST /api/avp-ayants-droit 200 in 5ms
+[?25h

@@ -1,0 +1,41 @@
+ ⚠ Port 3000 is in use, trying 3001 instead.
+Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+ ⨯ Error: Cannot find module './chunks/undefined'
+Require stack:
+- C:\Users\HP\Desktop\avp-calculator\.next\server\webpack-api-runtime.js
+- C:\Users\HP\Desktop\avp-calculator\.next\server\pages\api\travail.js
+- C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\future\helpers\module-loader\node-module-loader.js
+- C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\future\helpers\module-loader\route-module-loader.js
+- C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\next-server.js
+- C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\dev\next-dev-server.js
+- C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\next.js
+- C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\lib\start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1456:15)
+    at C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+    at Module._load (node:internal/modules/cjs/loader:1242:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1556:12)
+    at mod.require (C:\Users\HP\Desktop\avp-calculator\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at t.f.require (C:\Users\HP\Desktop\avp-calculator\.next\server\webpack-api-runtime.js:1:951)
+    at C:\Users\HP\Desktop\avp-calculator\.next\server\webpack-api-runtime.js:1:432
+    at Array.reduce (<anonymous>)
+    at t.e (C:\Users\HP\Desktop\avp-calculator\.next\server\webpack-api-runtime.js:1:411)
+    at Array.map (<anonymous>)
+    at t.X (C:\Users\HP\Desktop\avp-calculator\.next\server\webpack-api-runtime.js:1:724) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\.next\\server\\webpack-api-runtime.js',
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\.next\\server\\pages\\api\\travail.js',
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\node_modules\\next\\dist\\server\\future\\helpers\\module-loader\\node-module-loader.js',
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\node_modules\\next\\dist\\server\\future\\helpers\\module-loader\\route-module-loader.js',
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\node_modules\\next\\dist\\server\\next-server.js',
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js',
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\node_modules\\next\\dist\\server\\next.js',
+    'C:\\Users\\HP\\Desktop\\avp-calculator\\node_modules\\next\\dist\\server\\lib\\start-server.js'
+  ]
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\HP\Desktop\avp-calculator\.next\cache\webpack\client-development\2.pack.gz_' -> 'C:\Users\HP\Desktop\avp-calculator\.next\cache\webpack\client-development\2.pack.gz'

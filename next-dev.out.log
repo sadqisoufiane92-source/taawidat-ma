@@ -1,0 +1,21 @@
+
+> avp-calculator@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3004
+
+ ✓ Starting...
+ ✓ Ready in 1381ms
+ ○ Compiling /labor ...
+ ✓ Compiled /labor in 2.7s (268 modules)
+ ✓ Compiled in 158ms (268 modules)
+ GET /labor 200 in 2952ms
+ GET /labor 200 in 18ms
+ GET /labor 200 in 16ms
+ GET /labor 200 in 17ms
+ GET /labor 200 in 14ms
+ ✓ Compiled /api/labor in 111ms (68 modules)
+ POST /api/labor 200 in 138ms
+ ✓ Compiled in 601ms (268 modules)
+ ✓ Compiled in 420ms (268 modules)

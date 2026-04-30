@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "source": "Décret n°2.25.983 — Accord social tripartite avril 2024",
+    "note": "Mettre à jour à chaque arrêté. Valeurs en vigueur au 27 avril 2026."
+  },
+  "industrie_commerce_services": {
+    "effectif_depuis": "2026-01-01",
+    "horaire": 17.92,
+    "mensuel_brut": 3429.00,
+    "journalier_base26": 131.88,
+    "annuel": 41148.00
+  },
+  "agriculture": {
+    "effectif_depuis": "2026-04-01",
+    "journalier": 97.44,
+    "mensuel_base26": 2533.44,
+    "annuel": 30401.28
+  },
+  "historique": {
+    "2025": {
+      "industrie_commerce_services": {
+        "effectif_depuis": "2025-01-01",
+        "horaire": 17.10,
+        "mensuel_brut": 3271.00,
+        "journalier_base26": 125.81,
+        "annuel": 39252.00
+      },
+      "agriculture": {
+        "effectif_depuis": "2025-04-01",
+        "journalier": 93.00,
+        "mensuel_base26": 2418.00,
+        "annuel": 29016.00
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+
+> avp-calculator@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3002
+
+ ✓ Starting...
+ ✓ Ready in 1362ms
+ ✓ Compiled /api/travail in 165ms (65 modules)
+ POST /api/travail 400 in 216ms
+ ✓ Compiled in 98ms (65 modules)
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1995ms (280 modules)
+ ✓ Compiled in 127ms (214 modules)
+ POST /api/travail 500 in 3224ms
+ ✓ Compiled in 160ms (213 modules)
+ ✓ Compiled in 339ms (264 modules)
+ ✓ Compiled in 115ms (213 modules)
+ ✓ Compiled in 68ms (213 modules)
+ ✓ Compiled in 123ms (213 modules)
+ ✓ Compiled in 111ms (213 modules)
+ ✓ Compiled in 105ms (213 modules)
+ ✓ Compiled in 106ms (213 modules)
+ ✓ Compiled in 98ms (213 modules)
+ ✓ Compiled in 129ms (213 modules)
+ ✓ Compiled in 105ms (213 modules)
+ ✓ Compiled in 80ms (213 modules)
+ ✓ Compiled in 103ms (213 modules)
+ ✓ Compiled in 130ms (213 modules)
+ ✓ Compiled in 99ms (213 modules)
+ ✓ Compiled in 99ms (213 modules)
+ ✓ Compiled in 116ms (213 modules)
+ ✓ Compiled in 114ms (213 modules)
+ ✓ Compiled in 103ms (213 modules)
+ ✓ Compiled in 114ms (213 modules)
+ ✓ Compiled in 134ms (213 modules)
+ ✓ Compiled in 89ms (213 modules)
+ ✓ Compiled in 104ms (213 modules)
+ ✓ Compiled in 135ms (213 modules)
+ ✓ Compiled in 91ms (213 modules)
+ ✓ Compiled in 121ms (213 modules)
+ ✓ Compiled in 119ms (213 modules)
+ ✓ Compiled in 78ms (213 modules)
