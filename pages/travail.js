@@ -322,15 +322,25 @@ export default function TravailPage() {
         body: JSON.stringify(body)
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "API error");
-      setResults(data);
+
+      if (!response.ok) {
+        setApiError((data.error && data.error.message) || "حدث خطأ في الحساب — يرجى المحاولة مجدداً");
+        return;
+      }
+
+      if (!data.result) {
+        setApiError("حدث خطأ في الحساب — يرجى المحاولة مجدداً");
+        return;
+      }
+
+      setResults(data.result);
       setTimeout(() => {
         if (window.innerWidth < 960 && resultsRef.current) {
           window.scrollTo({ top: resultsRef.current.getBoundingClientRect().top + window.scrollY - 16, behavior: "smooth" });
         }
       }, 60);
     } catch (error) {
-      setApiError("حدث خطأ في الحساب — يرجى التحقق من المعطيات المدخلة");
+      setApiError("تعذّر الاتصال بالخادم — يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً");
     } finally {
       setLoading(false);
     }

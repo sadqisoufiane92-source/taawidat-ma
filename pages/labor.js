@@ -649,8 +649,18 @@ export default function LaborPage() {
         }),
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "API error");
-      setResults({ results: data.results, completedYears: data.yearsOfService });
+
+      if (!response.ok) {
+        setApiError((data.error && data.error.message) || "حدث خطأ في الحساب — يرجى المحاولة مجدداً");
+        return;
+      }
+
+      if (!data.result) {
+        setApiError("حدث خطأ في الحساب — يرجى المحاولة مجدداً");
+        return;
+      }
+
+      setResults({ results: data.result.results, completedYears: data.result.yearsOfService });
       setTimeout(() => {
         if (window.innerWidth < 960 && resultsRef.current) {
           window.scrollTo({
@@ -660,7 +670,7 @@ export default function LaborPage() {
         }
       }, 60);
     } catch (err) {
-      setApiError("??? ??? ?? ?????? ? ???? ?????? ?? ???????? ???????");
+      setApiError("تعذّر الاتصال بالخادم — يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً");
     } finally {
       setLoading(false);
     }
