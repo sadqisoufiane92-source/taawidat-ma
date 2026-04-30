@@ -43,16 +43,19 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* CARD 2 — Disabled */}
-            <div className="card disabled">
+            {/* CARD 2 — Active */}
+            <Link href="/avp-victime" className="card active">
               <div className="card-header">
                 <div className="card-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="13" cy="9" r="4" stroke="#7B5EA7" fill="#E9D8FD"/><path d="M5 27c0-4 3.134-7 8-7" stroke="#7B5EA7"/><circle cx="22" cy="17" r="5" stroke="#C44B4B" fill="#FED7D7"/><line x1="22" y1="14" x2="22" y2="20" stroke="#C44B4B"/><line x1="19" y1="17" x2="25" y2="17" stroke="#C44B4B"/></svg></div>
-                <span className="badge-soon">قريباً</span>
               </div>
               <div className="card-title">حوادث السير · الضحية</div>
               <div className="card-law">قانون 70.24</div>
               <p className="card-desc">تقدير التعويض المستحق للضحية المباشرة عن العجز الجزئي أو الكلي وفق القانون 70.24 الصادر في يناير 2026</p>
-            </div>
+              <div className="card-footer">
+                <span className="card-cta">ابدأ الحساب</span>
+                <span className="card-arrow">←</span>
+              </div>
+            </Link>
 
             {/* CARD 3 — Active */}
             <Link href="/avp-ayants-droit" className="card active">
