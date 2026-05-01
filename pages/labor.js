@@ -926,6 +926,11 @@ export default function LaborPage() {
       gap: 12px;
       padding: 16px 24px 24px;
       border-top: 1px solid var(--c-border);
+      flex-wrap: wrap;
+    }
+    @media (max-width: 480px) {
+      .panel-foot { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -1449,36 +1454,6 @@ export default function LaborPage() {
     .total-disclaimer svg { flex-shrink: 0; margin-top: 2px; color: oklch(55% 0.02 160); }
 
     /* ═══════════════════════════════════════════════
-       LEGAL STRIP
-    ═══════════════════════════════════════════════ */
-    .legal-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      padding: 0 0 32px;
-    }
-    @media (max-width: 700px) { .legal-strip { grid-template-columns: 1fr; } }
-
-    .legal-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 18px;
-      background: var(--c-surface);
-      border: 1.5px solid var(--c-border);
-      border-radius: var(--r-lg);
-    }
-    .legal-item svg { color: var(--c-green-600); flex-shrink: 0; margin-top: 2px; }
-    .legal-item h4 {
-      font-family: var(--f-head);
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--c-text-900);
-      margin-bottom: 4px;
-    }
-    .legal-item p { font-size: 12.5px; color: var(--c-text-500); line-height: 1.6; }
-
-    /* ═══════════════════════════════════════════════
        FOOTER
     ═══════════════════════════════════════════════ */
     .site-foot {
@@ -1735,46 +1710,11 @@ export default function LaborPage() {
         </main>
 
         <AdSlot position="bottom" />
-
-        <section className="legal-strip" id="legal">
-          <div className="legal-item">
-            <Icon name="doc" size={18} />
-            <div>
-              <h4>مدونة الشغل المغربية</h4>
-              <p>الحسابات مستندة إلى نصوص مدونة الشغل والقرارات القضائية ذات الصلة.</p>
-            </div>
-          </div>
-          <div className="legal-item">
-            <Icon name="shield" size={18} />
-            <div>
-              <h4>سرية كاملة</h4>
-              <p>لا يتم حفظ أو إرسال أي بيانات. الحساب يجري مباشرة في متصفحك.</p>
-            </div>
-          </div>
-          <div className="legal-item">
-            <Icon name="info" size={18} />
-            <div>
-              <h4>للاسترشاد فقط</h4>
-              <p>الحاسبة أداة مساعدة ولا تُغني عن استشارة محامٍ مختص في النزاعات الاجتماعية.</p>
-            </div>
-          </div>
-        </section>
       </div>
 
-      <footer className="site-foot" id="contact">
+      <footer className="site-foot">
         <div className="site-foot-inner">
-          <div className="brand">
-            <span className="brand-mark" aria-hidden="true">
-              <Icon name="scale" size={20} />
-            </span>
-            <div className="brand-text">
-              <span className="brand-name">ميزان</span>
-              <span className="brand-sub">حاسبة نزاعات الشغل</span>
-            </div>
-          </div>
-          <p className="site-foot-text">
-            © {new Date().getFullYear()} ميزان · جميع الحقوق محفوظة · أداة قانونية تعليمية
-          </p>
+          <span className="site-foot-text">هذه الحاسبة للاستئناس فقط ولا تغني عن استشارة محامٍ مختص</span>
         </div>
       </footer>
       </div>

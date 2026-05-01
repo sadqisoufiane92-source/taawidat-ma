@@ -32,6 +32,16 @@ export default function SiteNav({ current }) {
           ))}
         </ul>
       </div>
+      <style jsx>{`
+        @media (max-width: 500px) {
+          .site-nav-links {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            white-space: nowrap;
+          }
+        }
+      `}</style>
     </nav>
   );
 }

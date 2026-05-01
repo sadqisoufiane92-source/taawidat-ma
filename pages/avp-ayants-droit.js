@@ -573,8 +573,7 @@ export default function AvpAyantsDroitPage() {
 
         <footer className="site-foot">
           <div className="site-foot-inner">
-            <span className="site-foot-text">حاسبة قانونية</span>
-            <span className="site-foot-text">www.hasiba.ma</span>
+            <span className="site-foot-text">هذه الحاسبة للاستئناس فقط ولا تغني عن استشارة محامٍ مختص</span>
           </div>
         </footer>
       </div>
