@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taawidat.ma/sitemap.xml
+Sitemap: https://www.taawidat.ma/sitemap.xml
