@@ -10,9 +10,9 @@ export default function Home() {
         <style>{`
 /* HOW IT WORKS */
 .how-section {
-  max-width: 900px;
-  margin: 48px auto 0;
-  padding: 0 24px;
+  max-width: none;
+  margin: 0 0 32px 0;
+  padding: 0;
   text-align: center;
 }
 .how-title {
@@ -72,9 +72,9 @@ export default function Home() {
 
 /* FAQ */
 .faq-section {
-  max-width: 800px;
-  margin: 48px auto 48px;
-  padding: 0 24px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 .faq-title {
   font-family: 'Cairo', system-ui, sans-serif;
@@ -126,6 +126,37 @@ export default function Home() {
   line-height: 1.8;
   border-top: 1px solid #e2e8e0;
 }
+
+/* MAIN GRID */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 32px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  direction: rtl;
+}
+.main-grid-right {
+  direction: rtl;
+}
+.main-grid-left {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: sticky;
+  top: 80px;
+}
+@media (max-width: 960px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .main-grid-left {
+    position: static;
+  }
+}
 `}</style>
       </Head>
 
@@ -149,6 +180,8 @@ export default function Home() {
 
           <p className="section-label">اختر نوع النزاع</p>
 
+          <div className="main-grid">
+            <div className="main-grid-right">
           <div className="cards-grid">
 
             {/* CARD 1 — Active */}
@@ -208,7 +241,9 @@ export default function Home() {
             </Link>
 
           </div>
+            </div>
 
+            <div className="main-grid-left">
           {/* HOW IT WORKS */}
           <section className="how-section">
             <h2 className="how-title">كيف تعمل الحاسبة؟</h2>
@@ -258,6 +293,8 @@ export default function Home() {
               </details>
             </div>
           </section>
+            </div>
+          </div>
 
           <div className="ad-slot">إعلان</div>
         </main>
