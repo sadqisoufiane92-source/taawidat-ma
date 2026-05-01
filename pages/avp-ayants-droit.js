@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRef, useState } from "react";
+import SiteNav from '../components/SiteNav';
 
 const PERIODS = [
   { label: "يومي", value: "daily" },
@@ -407,6 +408,7 @@ export default function AvpAyantsDroitPage() {
       </Head>
 
       <div className="page" dir="rtl">
+        <SiteNav current="/avp-ayants-droit" />
         <section className="hero">
           <div className="hero-inner">
             <div className="hero-simple">

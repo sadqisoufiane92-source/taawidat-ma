@@ -1,14 +1,136 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import SiteNav from '../components/SiteNav';
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>حاسبة التعويضات القانونية</title>
+        <style>{`
+/* HOW IT WORKS */
+.how-section {
+  max-width: 900px;
+  margin: 48px auto 0;
+  padding: 0 24px;
+  text-align: center;
+}
+.how-title {
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 800;
+  color: #1B4332;
+  margin-bottom: 10px;
+}
+.how-sub {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 36px;
+}
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 700px) {
+  .how-steps { grid-template-columns: 1fr; }
+}
+.how-step {
+  background: #fff;
+  border: 1.5px solid #e2e8e0;
+  border-radius: 16px;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.how-step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1B4332;
+  color: #fff;
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.how-step-title {
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #1B4332;
+}
+.how-step-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* FAQ */
+.faq-section {
+  max-width: 800px;
+  margin: 48px auto 48px;
+  padding: 0 24px;
+}
+.faq-title {
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-size: clamp(20px, 3.5vw, 26px);
+  font-weight: 800;
+  color: #1B4332;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: #fff;
+  border: 1.5px solid #e2e8e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.faq-item[open] { border-color: #1B4332; }
+.faq-q {
+  padding: 16px 20px;
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1B4332;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 400;
+  color: #1B4332;
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+.faq-item[open] .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  padding: 12px 20px 16px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+  border-top: 1px solid #e2e8e0;
+}
+`}</style>
       </Head>
 
       <div lang="ar" dir="rtl" className="index-page">
+        <SiteNav current="/" />
         {/* HEADER */}
         <header>
           <div className="header-inner">
@@ -86,6 +208,56 @@ export default function Home() {
             </Link>
 
           </div>
+
+          {/* HOW IT WORKS */}
+          <section className="how-section">
+            <h2 className="how-title">كيف تعمل الحاسبة؟</h2>
+            <p className="how-sub">ثلاث خطوات بسيطة للحصول على تقدير دقيق للتعويض المستحق</p>
+            <div className="how-steps">
+              <div className="how-step">
+                <div className="how-step-num">١</div>
+                <h3 className="how-step-title">اختر نوع النزاع</h3>
+                <p className="how-step-desc">حدد ما إذا كان النزاع يتعلق بنزاعات الشغل، حوادث الشغل، أو حوادث السير.</p>
+              </div>
+              <div className="how-step">
+                <div className="how-step-num">٢</div>
+                <h3 className="how-step-title">أدخل المعطيات</h3>
+                <p className="how-step-desc">أدخل البيانات المطلوبة كالراتب والتواريخ ونسب العجز وفق المعطيات المتوفرة لديك.</p>
+              </div>
+              <div className="how-step">
+                <div className="how-step-num">٣</div>
+                <h3 className="how-step-title">احصل على النتيجة</h3>
+                <p className="how-step-desc">تعرض الحاسبة تفصيلاً دقيقاً للمبالغ المستحقة مع المعادلات القانونية المعتمدة.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className="faq-section">
+            <h2 className="faq-title">أسئلة متكررة</h2>
+            <div className="faq-list">
+              <details className="faq-item">
+                <summary className="faq-q">هل نتائج الحاسبة ملزمة قانونياً؟</summary>
+                <p className="faq-a">لا. الحاسبة أداة استرشادية تعتمد على النصوص القانونية المعمول بها. القرار النهائي في تحديد التعويض يبقى من اختصاص المحكمة المختصة.</p>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-q">ما هي القوانين التي تستند إليها الحاسبة؟</summary>
+                <p className="faq-a">تستند الحاسبة إلى مدونة الشغل المغربية لنزاعات الشغل، وظهير 1927 لحوادث الشغل، والقانون 70.24 الصادر في يناير 2026 لحوادث السير.</p>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-q">هل يتم حفظ البيانات التي أدخلها؟</summary>
+                <p className="faq-a">لا. جميع البيانات المدخلة تُعالج مباشرة في المتصفح ولا يتم حفظها أو إرسالها إلى أي خادم خارجي.</p>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-q">هل الحاسبة مجانية؟</summary>
+                <p className="faq-a">نعم. الحاسبة مجانية بالكامل وتتوفر للجميع دون قيود.</p>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-q">هل يمكنني استخدام النتائج أمام المحكمة؟</summary>
+                <p className="faq-a">يمكن الاستعانة بالنتائج كمرجع استرشادي لتقدير المبالغ، لكن يُنصح دائماً باستشارة محامٍ مختص قبل اتخاذ أي إجراء قانوني.</p>
+              </details>
+            </div>
+          </section>
 
           <div className="ad-slot">إعلان</div>
         </main>

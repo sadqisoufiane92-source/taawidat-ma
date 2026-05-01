@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useMemo, useRef, useState } from "react";
+import SiteNav from '../components/SiteNav';
 
 const PERIODS = [
   { label: "يومي", value: "daily" },
@@ -571,6 +572,7 @@ export default function AvpVictimePage() {
       </Head>
 
       <div className="page" dir="rtl">
+        <SiteNav current="/avp-victime" />
         <section className="hero">
           <div className="hero-inner">
             <div className="hero-simple">

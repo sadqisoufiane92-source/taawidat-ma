@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useState, useMemo, useRef } from "react";
+import SiteNav from '../components/SiteNav';
 
 
 const CALCULATIONS = [
@@ -1507,6 +1508,7 @@ export default function LaborPage() {
   `}</style>
       </Head>
       <div className="page" dir="rtl">
+      <SiteNav current="/labor" />
       {/* Hero */}
       <section className="hero">
         <div className="hero-inner">

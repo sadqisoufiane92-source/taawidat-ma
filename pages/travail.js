@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useMemo, useRef, useState } from "react";
+import SiteNav from '../components/SiteNav';
 
 function formatMoney(value) {
   return `${Number(value || 0).toLocaleString("fr-MA", {
@@ -479,6 +480,7 @@ export default function TravailPage() {
         `}</style>
       </Head>
       <div className="page" dir="rtl">
+        <SiteNav current="/travail" />
         <section className="hero">
           <div className="hero-inner">
             <div className="hero-simple">
