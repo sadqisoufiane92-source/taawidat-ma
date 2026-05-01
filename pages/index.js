@@ -6,7 +6,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>حاسبة التعويضات القانونية المغربية</title>
+        <title>حاسبة التعويضات القانونية المغربية | taawidat.ma</title>
+        <meta name="description" content="احسب تعويضاتك القانونية بدقة: نزاعات الشغل، حوادث الشغل، وحوادث السير — وفق القانون المغربي المعمول به." />
       </Head>
 
       <div lang="ar" dir="rtl">

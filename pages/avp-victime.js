@@ -464,7 +464,8 @@ export default function AvpVictimePage() {
   return (
     <>
       <Head>
-        <title>حاسبة ضحية حادثة سير</title>
+        <title>حاسبة تعويض ضحية حادثة السير | القانون 70.24</title>
+        <meta name="description" content="احسب تعويضك كضحية حادثة سير: العجز المؤقت، الدائم، والتعويضات التكميلية وفق القانون 70.24." />
         <style>{`
           :root {
             --c-bg: oklch(97% 0.008 80);

@@ -364,7 +364,8 @@ export default function TravailPage() {
   return (
     <>
       <Head>
-        <title>حاسبة حوادث الشغل</title>
+        <title>حاسبة تعويضات حوادث الشغل | ظهير 1927</title>
+        <meta name="description" content="احسب تعويض العجز المؤقت والدائم وحقوق ذوي الحقوق في حوادث الشغل وفق ظهير 1927 المغربي." />
         <style>{`
           :root {
             --c-bg: oklch(97% 0.008 80);

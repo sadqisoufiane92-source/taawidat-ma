@@ -296,7 +296,8 @@ export default function AvpAyantsDroitPage() {
   return (
     <>
       <Head>
-        <title>حاسبة ذوي الحقوق في حوادث السير</title>
+        <title>حاسبة تعويض ذوي الحقوق في حوادث السير | القانون 70.24</title>
+        <meta name="description" content="احسب تعويضات ذوي حقوق ضحايا حوادث السير حسب كل فئة مستفيدة وفق القانون المغربي 70.24." />
         <style>{`
           :root {
             --c-bg: oklch(97% 0.008 80);

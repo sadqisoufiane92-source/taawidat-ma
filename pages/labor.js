@@ -710,6 +710,8 @@ export default function LaborPage() {
   return (
     <>
       <Head>
+        <title>حاسبة تعويضات نزاعات الشغل | مدونة الشغل المغربية</title>
+        <meta name="description" content="احسب تعويض الإخطار، الفصل التعسفي، العطل السنوية ومنحة الأقدمية وفق مدونة الشغل المغربية." />
         <style>{`
     /* ═══════════════════════════════════════════════
        DESIGN TOKENS
