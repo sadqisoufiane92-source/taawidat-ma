@@ -232,7 +232,9 @@ export default function Home() {
 
       </div>
 
-      <style>{`
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -630,7 +632,9 @@ export default function Home() {
           font-size: 13px;
           color: oklch(1 0 0 / 0.45);
         }
-      `}</style>
+      `,
+        }}
+      />
     </>
   );
 }
