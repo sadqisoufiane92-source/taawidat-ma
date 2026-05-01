@@ -13,8 +13,11 @@ export default function SiteNav({ current }) {
       <div className="site-nav-inner">
         <Link href="/" legacyBehavior>
           <a className="site-nav-logo">
-            <span className="site-nav-icon">⚖️</span>
-            <span className="site-nav-title">تااويدات</span>
+            <div className="site-nav-logo-icon">⚖️</div>
+            <div className="site-nav-logo-text">
+              حاسبة التعويضات
+              <span className="site-nav-logo-sub">القانون المغربي</span>
+            </div>
           </a>
         </Link>
         <ul className="site-nav-links">

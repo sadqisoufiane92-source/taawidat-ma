@@ -15,21 +15,26 @@ export default function App({ Component, pageProps }) {
         />
         <style>{`
   .site-nav {
-    background: oklch(26% 0.080 165);
-    border-bottom: 1px solid oklch(31% 0.090 162);
     position: sticky;
     top: 0;
     z-index: 100;
+    height: 64px;
+    background: oklch(0.20 0.07 155 / 0.95);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom: 1px solid oklch(1 0 0 / 0.08);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
   }
   .site-nav-inner {
-    max-width: 1200px;
+    max-width: 1100px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    height: 56px;
   }
   .site-nav-logo {
     display: flex;
@@ -38,12 +43,30 @@ export default function App({ Component, pageProps }) {
     text-decoration: none;
     flex-shrink: 0;
   }
-  .site-nav-icon { font-size: 20px; }
-  .site-nav-title {
-    font-family: 'Cairo', 'Noto Kufi Arabic', system-ui, sans-serif;
+  .site-nav-logo-icon {
+    width: 36px;
+    height: 36px;
+    background: oklch(0.72 0.12 75);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 18px;
+    flex-shrink: 0;
+  }
+  .site-nav-logo-text {
+    font-family: 'Cairo', 'Noto Kufi Arabic', system-ui, sans-serif;
+    font-size: 16px;
     font-weight: 800;
     color: #fff;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+  }
+  .site-nav-logo-sub {
+    font-size: 10px;
+    font-weight: 500;
+    color: oklch(1 0 0 / 0.55);
   }
   .site-nav-links {
     display: flex;
@@ -55,21 +78,22 @@ export default function App({ Component, pageProps }) {
     overflow-x: auto;
   }
   .site-nav-link {
-    display: inline-block;
-    padding: 6px 12px;
     font-family: 'Cairo', 'Noto Kufi Arabic', system-ui, sans-serif;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 600;
-    color: oklch(80% 0.02 160);
+    color: oklch(1 0 0 / 0.75);
     text-decoration: none;
-    border-radius: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
     white-space: nowrap;
-    transition: background .15s, color .15s;
+    transition: all 0.2s;
+    display: inline-block;
   }
-  .site-nav-link:hover { background: oklch(31% 0.090 162); color: #fff; }
-  .site-nav-link.is-active { background: oklch(45% 0.115 158); color: #fff; }
+  .site-nav-link:hover { color: #fff; background: oklch(1 0 0 / 0.1); }
+  .site-nav-link.is-active { color: oklch(0.72 0.12 75); background: oklch(1 0 0 / 0.08); }
   @media (max-width: 700px) {
-    .site-nav-title { display: none; }
+    .site-nav { padding: 0 16px; }
+    .site-nav-logo-text { display: none; }
     .site-nav-link { font-size: 12px; padding: 5px 8px; }
   }
 `}</style>
