@@ -381,7 +381,7 @@ function IndemniteCard({ result, monthlySalary, index, label }) {
         <ResultRow>
           <span className="row-key">الأجر الساعي</span>
           <span className="row-val">
-            {formatNumber(monthlySalary)} ÷ 191 = {formatNumber(result.hourlyWage)} درهم/ساعة
+            {formatMoney(Number(monthlySalary))} ÷ 191 = {formatNumber(result.hourlyWage)} درهم/ساعة
           </span>
         </ResultRow>
         <div className="brackets">
@@ -434,7 +434,7 @@ function CongesCard({ result, monthlySalary, index, label }) {
         <ResultRow>
           <span className="row-key">الأجر اليومي</span>
           <span className="row-val">
-            {formatNumber(monthlySalary)} ÷ 26 = {formatNumber(result.dailyRate)} درهم/يوم
+            {formatMoney(Number(monthlySalary))} ÷ 26 = {formatNumber(result.dailyRate)} درهم/يوم
           </span>
         </ResultRow>
         <div className="brackets">

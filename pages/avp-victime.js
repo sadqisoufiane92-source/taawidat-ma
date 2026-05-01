@@ -276,7 +276,7 @@ function formulaFor(kind, data) {
   }
 
   if (kind === "tiercePersonne" && data.capitalA !== undefined && data.net !== undefined) {
-    return `${formatFormulaNumber(data.capitalA)} × 50% × ${formatPercent(responsibility)} = ${formatFormulaNumber(data.net)} MAD`;
+    return `${formatFormulaNumber(data.capitalA)} × 50% × ${formatPercent(responsibility)} = ${formatFormulaNumber(data.net)} درهم`;
   }
 
   if (["pretiumDoloris"].includes(kind) && data.capitalA !== undefined && data.rate !== undefined && data.net !== undefined) {
