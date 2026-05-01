@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React from 'react';
 import SiteNav from '../components/SiteNav';
 
 export default function Home() {
+  const [openFaq, setOpenFaq] = React.useState(null);
+
   return (
     <>
       <Head>
@@ -157,41 +160,66 @@ export default function Home() {
               <h2 className="idx-section-title">ما تودّ معرفته</h2>
             </div>
             <div className="idx-faq-list">
-              <details className="idx-faq-item">
-                <summary className="idx-faq-q">
+              <div className={`idx-faq-item ${openFaq === 0 ? 'idx-faq-open' : ''}`}>
+                <button
+                  type="button"
+                  className="idx-faq-q"
+                  onClick={() => setOpenFaq(openFaq === 0 ? null : 0)}
+                  aria-expanded={openFaq === 0}
+                >
                   هل نتائج الحاسبة ملزمة قانونياً؟
                   <div className="idx-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 3v8M3 7h8"/></svg></div>
-                </summary>
-                <p className="idx-faq-a">لا. الحاسبة أداة استرشادية تعتمد على النصوص القانونية المعمول بها. القرار النهائي في تحديد التعويض يبقى من اختصاص المحكمة المختصة.</p>
-              </details>
-              <details className="idx-faq-item">
-                <summary className="idx-faq-q">
+                </button>
+                {openFaq === 0 && <p className="idx-faq-a">لا. الحاسبة أداة استرشادية تعتمد على النصوص القانونية المعمول بها. القرار النهائي في تحديد التعويض يبقى من اختصاص المحكمة المختصة.</p>}
+              </div>
+              <div className={`idx-faq-item ${openFaq === 1 ? 'idx-faq-open' : ''}`}>
+                <button
+                  type="button"
+                  className="idx-faq-q"
+                  onClick={() => setOpenFaq(openFaq === 1 ? null : 1)}
+                  aria-expanded={openFaq === 1}
+                >
                   ما هي القوانين التي تستند إليها الحاسبة؟
                   <div className="idx-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 3v8M3 7h8"/></svg></div>
-                </summary>
-                <p className="idx-faq-a">تستند الحاسبة إلى مدونة الشغل المغربية لنزاعات الشغل، وظهير 1927 لحوادث الشغل، والقانون 70.24 الصادر في يناير 2026 لحوادث السير.</p>
-              </details>
-              <details className="idx-faq-item">
-                <summary className="idx-faq-q">
+                </button>
+                {openFaq === 1 && <p className="idx-faq-a">تستند الحاسبة إلى مدونة الشغل المغربية لنزاعات الشغل، وظهير 1927 لحوادث الشغل، والقانون 70.24 الصادر في يناير 2026 لحوادث السير.</p>}
+              </div>
+              <div className={`idx-faq-item ${openFaq === 2 ? 'idx-faq-open' : ''}`}>
+                <button
+                  type="button"
+                  className="idx-faq-q"
+                  onClick={() => setOpenFaq(openFaq === 2 ? null : 2)}
+                  aria-expanded={openFaq === 2}
+                >
                   هل يتم حفظ البيانات التي أدخلها؟
                   <div className="idx-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 3v8M3 7h8"/></svg></div>
-                </summary>
-                <p className="idx-faq-a">لا. جميع البيانات المدخلة تُعالج مباشرة في المتصفح ولا يتم حفظها أو إرسالها إلى أي خادم خارجي.</p>
-              </details>
-              <details className="idx-faq-item">
-                <summary className="idx-faq-q">
+                </button>
+                {openFaq === 2 && <p className="idx-faq-a">لا. جميع البيانات المدخلة تُعالج مباشرة في المتصفح ولا يتم حفظها أو إرسالها إلى أي خادم خارجي.</p>}
+              </div>
+              <div className={`idx-faq-item ${openFaq === 3 ? 'idx-faq-open' : ''}`}>
+                <button
+                  type="button"
+                  className="idx-faq-q"
+                  onClick={() => setOpenFaq(openFaq === 3 ? null : 3)}
+                  aria-expanded={openFaq === 3}
+                >
                   هل الحاسبة مجانية؟
                   <div className="idx-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 3v8M3 7h8"/></svg></div>
-                </summary>
-                <p className="idx-faq-a">نعم. الحاسبة مجانية بالكامل وتتوفر للجميع دون قيود.</p>
-              </details>
-              <details className="idx-faq-item">
-                <summary className="idx-faq-q">
+                </button>
+                {openFaq === 3 && <p className="idx-faq-a">نعم. الحاسبة مجانية بالكامل وتتوفر للجميع دون قيود.</p>}
+              </div>
+              <div className={`idx-faq-item ${openFaq === 4 ? 'idx-faq-open' : ''}`}>
+                <button
+                  type="button"
+                  className="idx-faq-q"
+                  onClick={() => setOpenFaq(openFaq === 4 ? null : 4)}
+                  aria-expanded={openFaq === 4}
+                >
                   هل يمكنني استخدام النتائج أمام المحكمة؟
                   <div className="idx-faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 3v8M3 7h8"/></svg></div>
-                </summary>
-                <p className="idx-faq-a">يمكن الاستعانة بالنتائج كمرجع استرشادي لتقدير المبالغ، لكن يُنصح دائماً باستشارة محامٍ مختص قبل اتخاذ أي إجراء قانوني.</p>
-              </details>
+                </button>
+                {openFaq === 4 && <p className="idx-faq-a">يمكن الاستعانة بالنتائج كمرجع استرشادي لتقدير المبالغ، لكن يُنصح دائماً باستشارة محامٍ مختص قبل اتخاذ أي إجراء قانوني.</p>}
+              </div>
             </div>
           </section>
 
@@ -547,15 +575,20 @@ export default function Home() {
           overflow: hidden;
           transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .idx-faq-item[open] {
+        .idx-faq-item.idx-faq-open {
           border-color: var(--idx-green-400);
           box-shadow: 0 4px 20px oklch(0.50 0.13 155 / 0.10);
         }
         .idx-faq-q {
+          width: 100%;
+          background: none;
+          border: none;
+          cursor: pointer;
+          text-align: right;
+          font-family: inherit;
           padding: 18px 22px;
           font-size: 15px; font-weight: 700;
           color: var(--idx-text-dark);
-          cursor: pointer;
           list-style: none;
           display: flex; align-items: center;
           justify-content: space-between; gap: 16px;
@@ -573,12 +606,12 @@ export default function Home() {
           color: var(--idx-green-800);
         }
         .idx-faq-icon svg { transition: transform 0.25s; }
-        .idx-faq-item[open] .idx-faq-icon {
+        .idx-faq-item.idx-faq-open .idx-faq-icon {
           background: var(--idx-green-900);
           border-color: var(--idx-green-900);
           color: #fff;
         }
-        .idx-faq-item[open] .idx-faq-icon svg { transform: rotate(45deg); }
+        .idx-faq-item.idx-faq-open .idx-faq-icon svg { transform: rotate(45deg); }
         .idx-faq-a {
           padding: 0 22px 18px;
           font-size: 14px; color: var(--idx-text-mid); line-height: 1.85;
