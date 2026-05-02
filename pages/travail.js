@@ -471,6 +471,22 @@ export default function TravailPage() {
           .empty-title { font-family: var(--f-head); font-size: 16px; font-weight: 800; color: var(--c-text-700); }
           .empty-text { font-size: 13px; color: var(--c-text-500); max-width: 320px; }
           .total-card { background: linear-gradient(135deg, var(--c-green-900), var(--c-green-800)); border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-lg); color: #fff; }
+          .total-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+              45deg,
+              oklch(100% 0 0 / .02) 0px,
+              oklch(100% 0 0 / .02) 1px,
+              transparent 1px,
+              transparent 12px
+            );
+          }
+          .total-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+          }
           .total-inner { padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; }
           .total-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--f-head); font-size: 12px; font-weight: 700; color: var(--c-gold-200); }
           .total-amount-num { font-family: var(--f-head); font-size: clamp(28px, 5vw, 38px); font-weight: 900; color: var(--c-gold-500); direction: ltr; }
