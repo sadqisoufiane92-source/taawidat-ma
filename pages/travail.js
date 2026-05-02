@@ -125,7 +125,7 @@ function VictimResults({ results }) {
         <div className="result-body">
           <ResultRow label="عدد الأيام">{formatNumber(r.itt.details.nombreJours)} يوم</ResultRow>
           <ResultRow label="النسبة">2/3</ResultRow>
-          <ResultRow label="المعادلة" emphasis>{formatNumber(r.itt.details.nombreJours)} × {formatMoney(r.itt.details.salaireJournalier)} × 2/3 = <strong>{formatMoney(r.itt.montant)}</strong></ResultRow>
+          <ResultRow label="المعادلة" emphasis>{formatNumber(r.itt.details.nombreJours)} × {formatNumber(r.itt.details.salaireJournalier)} × 2/3 = <strong>{formatMoney(r.itt.montant)}</strong></ResultRow>
         </div>
       </article>
       <article className="result-card">
@@ -135,7 +135,7 @@ function VictimResults({ results }) {
           <ResultRow label="نسبة IPP">{formatNumber(r.ipp.details.tauxIPP * 100)}%</ResultRow>
           <ResultRow label="النسبة الفعلية">{formatNumber(r.ipp.taux_effectif * 100)}%</ResultRow>
           <ResultRow label="نوع التعويض"><span className="badge badge-ok">{ippTypeLabel(r.ipp.type)}</span></ResultRow>
-          <ResultRow label="المعادلة" emphasis>{formatMoney(r.ipp.details.salaireAnnuel)} × {formatNumber(r.ipp.taux_effectif * 100)}% = <strong>{formatMoney(r.ipp.montant)}</strong></ResultRow>
+          <ResultRow label="المعادلة" emphasis>{formatNumber(r.ipp.details.salaireAnnuel)} × {formatNumber(r.ipp.taux_effectif * 100)}% = <strong>{formatMoney(r.ipp.montant)}</strong></ResultRow>
         </div>
       </article>
       {faute && (
@@ -145,7 +145,7 @@ function VictimResults({ results }) {
             <ResultRow label="العمود المعتمد">{faute.col_used}</ResultRow>
             <ResultRow label="السن المعتمد">{formatNumber(faute.age_used)} سنة</ResultRow>
             <ResultRow label="معامل الجدول">{formatNumber(faute.prix)}</ResultRow>
-            <ResultRow label="المعادلة" emphasis>{formatMoney(faute.details.renteIPP_annuelle)} × {formatNumber(faute.prix)} = <strong>{formatMoney(faute.capital_majoration)}</strong></ResultRow>
+            <ResultRow label="المعادلة" emphasis>{formatNumber(faute.details.renteIPP_annuelle)} × {formatNumber(faute.prix)} = <strong>{formatMoney(faute.capital_majoration)}</strong></ResultRow>
           </div>
         </article>
       )}
@@ -661,9 +661,21 @@ export default function TravailPage() {
                 {results?.mode === "deces" && total > 0 && <DeathResults results={results} />}
                 {results && total > 0 && (
                   <div className="total-card">
+                    <div className="total-pattern" aria-hidden="true" />
                     <div className="total-inner">
-                      <span className="total-eyebrow"><Icon name="scale" size={14} />المجموع المرجعي</span>
-                      <div><span className="total-amount-num">{formatNumber(total)}</span><span className="total-amount-curr"> درهم</span></div>
+                      <span className="total-eyebrow">
+                        <Icon name="check" size={14} />
+                        المجموع الكلي
+                      </span>
+                      <div className="total-amount">
+                        <span className="total-amount-num">
+                          {Number(total).toLocaleString("fr-MA", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </span>
+                        <span className="total-amount-curr">درهم</span>
+                      </div>
                     </div>
                   </div>
                 )}
