@@ -5,6 +5,7 @@ const NAV_LINKS = [
   { href: '/travail', label: 'حوادث الشغل' },
   { href: '/avp-victime', label: 'حوادث السير · الضحية' },
   { href: '/avp-ayants-droit', label: 'حوادث السير · ذوو الحقوق' },
+  { href: '/blog', label: 'دليلك القانوني' },
 ];
 
 export default function SiteNav({ current }) {
