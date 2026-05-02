@@ -207,7 +207,6 @@ function NumberInput({ value, onChange, placeholder, suffix }) {
       <input
         type="number"
         inputMode="decimal"
-        min="1"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
