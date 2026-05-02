@@ -1,22 +1,7 @@
-const path = require("path");
 const { sendSuccess, sendError } = require("../../lib/apiResponse");
-
-function loadEngines() {
-  const runtimeRequire = eval("require");
-  const itt = runtimeRequire(path.join(process.cwd(), "engine/work_accidents/wa_itt.js"));
-  const ipp = runtimeRequire(path.join(process.cwd(), "engine/work_accidents/wa_ipp.js"));
-  const ayantsDroit = runtimeRequire(path.join(process.cwd(), "engine/work_accidents/wa_ayants_droit.js"));
-  return {
-    calcSalaireJournalier: itt.calcSalaireJournalier,
-    calcITT_WA: itt.calcITT_WA,
-    calcIPP_WA: ipp.calcIPP_WA,
-    calcFauteInexcusable: ipp.calcFauteInexcusable,
-    calcRenteConjoint: ayantsDroit.calcRenteConjoint,
-    calcRenteEnfants: ayantsDroit.calcRenteEnfants,
-    calcRenteAscendants: ayantsDroit.calcRenteAscendants,
-    calcPlafondAyantsDroit: ayantsDroit.calcPlafondAyantsDroit
-  };
-}
+const { calcSalaireJournalier, calcITT_WA } = require("../../engine/work_accidents/wa_itt.js");
+const { calcIPP_WA, calcFauteInexcusable } = require("../../engine/work_accidents/wa_ipp.js");
+const { calcRenteConjoint, calcRenteEnfants, calcRenteAscendants, calcPlafondAyantsDroit } = require("../../engine/work_accidents/wa_ayants_droit.js");
 
 function ageInFullYears(dateNaissance, dateReference) {
   const birth = new Date(dateNaissance);
@@ -138,17 +123,6 @@ export default function handler(req, res) {
       const err = validateDeces(body);
       if (err) return sendError(res, "travail", 400, "VALIDATION_ERROR", err);
     }
-
-    const {
-      calcSalaireJournalier,
-      calcITT_WA,
-      calcIPP_WA,
-      calcFauteInexcusable,
-      calcRenteConjoint,
-      calcRenteEnfants,
-      calcRenteAscendants,
-      calcPlafondAyantsDroit
-    } = loadEngines();
 
     if (mode === "victime") {
       const salaire = Number(body.salaire);
