@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ma.taawidat.app",
+      "sha256_cert_fingerprints": [
+        "30:C8:1F:83:1B:31:27:E0:C4:CF:A2:19:E1:FB:57:B8:D1:84:3B:F4:CA:1A:1C:C6:9A:D6:9C:E6:93:95:3F:B8"
+      ]
+    }
+  }
+]
