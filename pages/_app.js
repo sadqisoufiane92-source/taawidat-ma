@@ -1,9 +1,22 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 const GA_ID = 'G-8QP3XESLWT'; // replace with your actual Measurement ID
 
 export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      process.env.NODE_ENV === 'production' &&
+      'serviceWorker' in navigator
+    ) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .catch(console.error);
+    }
+  }, []);
+
   return (
     <>
       <Head>
