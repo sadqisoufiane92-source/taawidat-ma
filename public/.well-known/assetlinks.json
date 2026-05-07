@@ -1,14 +1,8 @@
-[
-  {
-    "relation": [
-      "delegate_permission/common.handle_all_urls"
-    ],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "ma.taawidat.app",
-      "sha256_cert_fingerprints": [
-        "30:C8:1F:83:1B:31:27:E0:C4:CF:A2:19:E1:FB:57:B8:D1:84:3B:F4:CA:1A:1C:C6:9A:D6:9C:E6:93:95:3F:B8"
-      ]
-    }
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "ma.taawidat.app",
+    "sha256_cert_fingerprints": ["2B:03:54:9F:39:7C:40:21:5A:77:4B:7C:9D:2A:3C:6B:B1:2A:40:47:8B:D5:D4:9B:73:A9:DB:F7:0B:81:0E:CA"]
   }
-]
+}]
