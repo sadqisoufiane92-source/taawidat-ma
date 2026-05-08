@@ -38,7 +38,11 @@ export default function SiteNav({ current }) {
         <div className="site-nav-inner">
           <Link href="/" legacyBehavior>
             <a className="site-nav-logo" onClick={() => setIsMenuOpen(false)}>
-              <div className="site-nav-logo-icon">⚖️</div>
+              <img
+                src="/icons/icon-48.png"
+                alt="logo"
+                style={{ width: '32px', height: '32px', borderRadius: '8px' }}
+              />
               <div className="site-nav-logo-text">
                 حاسبة التعويضات
                 <span className="site-nav-logo-sub">القانون المغربي</span>
