@@ -1,6 +1,6 @@
 {
   "name": "حاسبة التعويضات القانونية",
-  "short_name": "taawidat.ma",
+  "short_name": "تعويضات",
   "description": "احسب تعويضاتك القانونية وفق القانون المغربي",
   "start_url": "/",
   "display": "standalone",
